@@ -1,0 +1,143 @@
+{
+  "name": "name-of-github-repo",
+  "version": "0.0.1",
+  "description": "",
+  "repository": "https://github.umn.edu",
+  "license": "MIT",
+  "author": "University of Minnesota",
+  "scripts": {
+    "clean": "rm -f package-lock.json && rm -rf node_modules  && npm i",
+    "test": "jest --passWithNoTests ",
+    "coverage": "npm run test && node utils/testCoverage.js",
+    "npmAudit": "npm audit --audit-level=moderate",
+    "npmAuditJson": "npm run npmAudit -- --json  > npmAuditReport.json",
+    "----------------------------------------------------------3": "",
+    "prettier": "prettier  --ignore-path ./.eslintignore --check",
+    "prettier:fix": "prettier  --ignore-path ./.eslintignore --write ",
+    "prettier:all": "npm run prettier '**/*.+(js|jsx|html|css|scss|json|md)'",
+    "prettier:fixAll": "npm run prettier:fix '**/*.+(js|jsx|html|css|scss|json|md)'",
+    "----------------------------------------------------------4": "",
+    "lint": "esw --color ",
+    "lint:fix": "npm run lint -- --fix",
+    "lint:css": "stylelint --ignore-path ./.eslintignore --allow-empty-input './**/*.+(css|scss)'",
+    "lint:css:fix": "npm run lint:css -- --fix",
+    "lint:all": "npm run lint && npm run lint:css",
+    "lint:fixAll": "npm run prettier:fixAll && npm run lint:fix && npm run lint:css:fix"
+  },
+  "dependencies": {
+    "async": "^3.2.0",
+    "axios": "^0.19.2",
+    "lodash": "^4.17.15",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "@babel/runtime": "^7.9.2",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.2.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-to-json": "3.4.4",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^3.0.0",
+    "eslint-watch": "^6.0.1",
+    "husky": "^4.2.3",
+    "jest": "^25.2.3",
+    "jest-axe": "^3.4.0",
+    "jest-cli": "^25.2.3",
+    "lint-staged": "^10.0.10",
+    "prettier": "2.0.2",
+    "stylelint": "^13.2.1",
+    "stylelint-config-standard": "^20.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "airbnb",
+      "airbnb/hooks",
+      "prettier"
+    ],
+    "globals": {
+      "styles": true
+    },
+    "env": {
+      "jest": true,
+      "es6": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "prettier/prettier": "error",
+      "no-var": "error",
+      "curly": "error",
+      "one-var": "error",
+      "no-console": "error",
+      "no-underscore-dangle": "off"
+    }
+  },
+  "stylelint": {
+    "ignorePath": "./eslintignore",
+    "extends": "stylelint-config-standard"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-transform-runtime"
+    ],
+    "ignore": [
+      "node_modules"
+    ],
+    "sourceMap": "inline",
+    "retainLines": true
+  },
+  "prettier": {
+    "singleQuote": true,
+    "jsxSingleQuote": true,
+    "printWidth": 80
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/lint-staged.config.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/",
+      "/utils/",
+      "/__fixtures__"
+    ],
+    "coverageReporters": [
+      "html",
+      "cobertura",
+      "json-summary",
+      "text-summary"
+    ]
+  }
+}

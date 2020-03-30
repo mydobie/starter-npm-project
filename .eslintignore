@@ -1,0 +1,6 @@
+/build/*
+/coverage/*
+/node_modules/*
+package-lock.json
+lint-staged.config.js
+package.json
