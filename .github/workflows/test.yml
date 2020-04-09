@@ -1,0 +1,24 @@
+name: Test
+
+on: [push]
+
+jobs:
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Install
+        run: |
+          npm ci
+      - name: Unit tests
+        run: |
+          npm run test
+          npm run coverage
+      - name: Code quality
+        run: |
+          npm run lint:all
+          npm run npmAudit

@@ -28,17 +28,27 @@ npm install
 
 ---
 
+## Modify files ignored during linting
+
+The `.eslintignore` file list all the files and directories that will be ignored during linting.
+
+## Modify files ignored during test coverage
+
+Files and directories that should not be counted during the test coverage analysis are listed in the `package.json` file in the `jest.coveragePathIgnorePatterns` array.
+
+---
+
 ## Remove Git hooks
 
 This application is set to prevent a commit if there are linting errors. The configuration for these git hooks are listed in the `lint-staged.config.js` file.
 
-To remove the hooks, you nee dto remove the husky module by running the following in a terminal:
+To remove the hooks, you need to remove the husky module by running the following in a terminal:
 
 ```
 npm uninstall husky --save
 ```
 
-NOTE: This will change the package.json file. After the husky module is removed, the `lint-staged.config.js` file can be removed.
+NOTE: This will change the package.json and package.lock.json files. After the husky module is removed, the `lint-staged.config.js` file can be removed.
 
 ## Automatically fixing lint errors
 
