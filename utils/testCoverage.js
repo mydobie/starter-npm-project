@@ -14,7 +14,10 @@ try {
   console.log('Coverage Summary: ');
   console.log(json.total);
 
-  if (json.total.lines.pct < minimumCoveragePercent) {
+  if (
+    json.total.lines.pct < minimumCoveragePercent &&
+    json.total.lines.pct !== 'Unknown'
+  ) {
     console.log('******************\n');
     console.log(
       `Minimum coverage of ${minimumCoveragePercent}% of lines covered was not met.`

@@ -1,0 +1,25 @@
+name: Test and Build
+
+on: [push]
+
+jobs:
+  build:
+    name: Test and Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - name: Get modules and build
+        run: |
+          npm ci
+          npm run build --if-present
+      - name: Unit tests
+        run: |
+          npm run test
+          npm run coverage
+      - name: Code quality
+        run: |
+          npm run lint:all
+          npm run npmAudit
