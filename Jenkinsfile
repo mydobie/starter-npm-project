@@ -9,9 +9,10 @@ pipeline {
     ARTIFACTORY = credentials('artifactory.umn.edu')
   }
   stages {
-    stage('Get Modules') {
+    stage('Get modules and build') {
       steps {
         sh 'npm ci'
+        sh 'npm run build --if-present'
       }
     }
     stage('NPM Audit') {
@@ -19,16 +20,9 @@ pipeline {
         sh 'npm run npmAudit'
       }
     }
-    stage('Test') {
+    stage('Unit tests') {
       steps {
         sh 'npm run test'
-      }
-    }
-    stage('Code Linting') {
-      steps {
-        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-          sh 'npm run lint:all'
-        }
       }
     }
     stage('Code Coverage') {
@@ -38,5 +32,13 @@ pipeline {
         }
       }
     }
+    stage('Code Linting') {
+      steps {
+        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+          sh 'npm run lint:all'
+        }
+      }
+    }
+    
   }
 }

@@ -125,7 +125,9 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/*.{js,jsx}",
-      "!**/lint-staged.config.js"
+      "!**/lint-staged.config.js",
+      "!**/lint-staged-FIX-ALL.config.js",
+      "!**/temp/*.*"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",
